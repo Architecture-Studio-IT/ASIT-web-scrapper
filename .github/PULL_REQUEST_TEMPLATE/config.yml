@@ -1,0 +1,17 @@
+blank_prs_enabled: false
+pull_request_templates:
+  - name: "Default PR"
+    about: "General purpose pull request template."
+    title: "[PR]: "
+    labels: ["needs-review"]
+    body: "./PULL_REQUEST_TEMPLATE/pull_request_template.md"
+  - name: "Bug Fix PR"
+    about: "Report a bug fix with steps to reproduce and tests."
+    title: "[Bug]: "
+    labels: ["bug"]
+    body: "./PULL_REQUEST_TEMPLATE/pull_request_template.md"
+  - name: "Feature PR"
+    about: "Describe a new feature or enhancement."
+    title: "[Feature]: "
+    labels: ["enhancement"]
+    body: "./PULL_REQUEST_TEMPLATE/pull_request_template.md"
