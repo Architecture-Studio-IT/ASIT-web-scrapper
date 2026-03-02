@@ -1,24 +1,33 @@
 ---
-name: Bug report
-about: Report a problem you've encountered
-labels: ["bug"]
+name: Bug Report
+about: Report a bug in the system
+title: "[Bug]: "
+labels: bug
+assignees: ''
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+## Description
+Describe the issue clearly.
 
-**To Reproduce**
-Steps to reproduce the behavior:
+## Steps to Reproduce
 1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+2. Click on '...'
+3. See the error.
 
-**Expected behavior**
-Describe what you expected to happen.
+## Expected Behavior
+What should happen?
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
 
-**Additional context**
+## Actual Behavior
+What happens instead?
+
+### Screenshots
+Add screenshots if applicable.
+
+### Environment
+- OS: [e.g., Windows, macOS, Linux]
+- Browser: [e.g., Chrome, Firefox]
+- Version: [e.g., 1.0.0]
+
+### Additional Context
 Add any other context about the problem here.
