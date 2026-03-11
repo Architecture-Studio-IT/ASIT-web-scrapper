@@ -32,3 +32,6 @@ go.work.sum
 # .vscode/
 
 node_modules/
+
+# logs
+logs/*
