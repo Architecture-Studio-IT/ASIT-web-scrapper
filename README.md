@@ -52,7 +52,7 @@ You'll be prompted for type, scope, description, etc.
 
 Be sure to have both ASIT and ASIT-web-scrapper in the same folder
 Now create a symlink to the .env of ASIT from ASIT-web-scrapper
-Form inside ASIT-web-scrapper execute `ln -s ../Asit/.env .env`
+From inside ASIT-web-scrapper execute `ln -s ../Asit/.env .env`
 Now you can run docker: `docker compose up`
 
 ## Dev Team
