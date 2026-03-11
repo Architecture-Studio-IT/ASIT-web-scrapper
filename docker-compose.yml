@@ -1,0 +1,27 @@
+services:
+  orchestrator:
+    build:
+      context: ./Orchestrator
+      dockerfile: Dockerfile
+    container_name: asit-orchestrator
+    restart: "no"
+    environment:
+      RABBITMQ_URL: amqp://${RABBITMQ_ORCHESTRATOR_USER}:${RABBITMQ_ORCHESTRATOR_PASSWORD}@asit-rabbitmq:5672/${RABBITMQ_VHOST:-}
+    networks:
+      - scrapper-net
+
+  scraper-ldlcpro:
+    build:
+      context: ./ldlcpro.com
+      dockerfile: Dockerfile
+    container_name: scraper-ldlcpro
+    restart: "no"
+    environment:
+      RABBITMQ_URL: amqp://${RABBITMQ_SCRAPER_USER}:${RABBITMQ_SCRAPER_PASSWORD}@asit-rabbitmq:5672/${RABBITMQ_VHOST:-}
+    networks:
+      - scrapper-net
+
+networks:
+  scrapper-net:
+    external: true
+    name: scrapper-net

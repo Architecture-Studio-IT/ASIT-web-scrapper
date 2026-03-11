@@ -47,6 +47,14 @@ You'll be prompted for type, scope, description, etc.
 
 > For more details, visit the [Commitizen project](https://commitizen.github.io/).
 
+
+## To start the project:
+
+Be sure to have both ASIT and ASIT-web-scrapper in the same folder
+Now create a symlink to the .env of ASIT from ASIT-web-scrapper
+From inside ASIT-web-scrapper execute `ln -s ../Asit/.env .env`
+Now you can run docker: `docker compose up`
+
 ## Dev Team
 
 ASIT is developed by the following team members:
