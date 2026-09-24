@@ -10,14 +10,29 @@ services:
     networks:
       - scrapper-net
 
-  scraper-ldlcpro:
+  # Import du catalogue depuis Open Icecat (source licenciée — Open Content License).
+  # Publie dans la queue "products", même contrat que l'ancien scraper.
+  #
+  #   docker compose run --rm importer-icecat categories "server|switch|router|access point"
+  #   docker compose run --rm importer-icecat features <icecat_id>
+  #   docker compose run --rm importer-icecat
+  importer-icecat:
     build:
-      context: ./ldlcpro.com
+      context: ./icecat
       dockerfile: Dockerfile
-    container_name: scraper-ldlcpro
+    container_name: importer-icecat
     restart: "no"
     environment:
       RABBITMQ_URL: amqp://${RABBITMQ_SCRAPER_USER}:${RABBITMQ_SCRAPER_PASSWORD}@asit-rabbitmq:5672/${RABBITMQ_VHOST:-}
+      ICECAT_USER: ${ICECAT_USER}
+      ICECAT_PASSWORD: ${ICECAT_PASSWORD}
+      ICECAT_LANG: ${ICECAT_LANG:-fr}
+      ICECAT_CATEGORIES: ${ICECAT_CATEGORIES}
+      ICECAT_INDEX: ${ICECAT_INDEX:-daily}
+      ICECAT_MAX_PRODUCTS: ${ICECAT_MAX_PRODUCTS:-0}
+      ICECAT_DELAY_MS: ${ICECAT_DELAY_MS:-300}
+      ICECAT_MIN_UPDATED: ${ICECAT_MIN_UPDATED:-}
+      ICECAT_MAX_PER_TYPE: ${ICECAT_MAX_PER_TYPE:-0}
     networks:
       - scrapper-net
 

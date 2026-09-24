@@ -1,0 +1,75 @@
+{
+  "_doc": [
+    "Projection des features Icecat vers les colonnes ASIT, par type de produit.",
+    "match : Feature.ID (chaîne numérique, stable) ou Feature.Name (insensible à la casse, FR ou EN) — le premier trouvé gagne.",
+    "type  : int (premier nombre) | text | bool (Oui/Y/1/Géré…) | present (feature présente et non 'Non') | concat (jointure) | ports (liste [{type,count}]) | contains (needle dans la valeur).",
+    "IDs relevés le 2026-09-18 sur des fiches réelles : serveur 133570551, switch 147848957, routeur 99954508, point d'accès 79344150.",
+    "Vérifier une fiche :  docker compose run --rm importer-icecat preview <icecat_id>"
+  ],
+  "server": {
+    "cpu_model":           { "type": "concat", "match": ["2196", "47"] },
+    "cpu_cores":           { "type": "int",  "match": ["6089", "Nombre de coeurs de processeurs", "Processor cores"] },
+    "cpu_frequency":       { "type": "text", "match": ["11379", "Fréquence du processeur", "Processor frequency"] },
+    "cpu_socket":          { "type": "text", "match": ["Socket du processeur", "Processor socket"] },
+    "ram_gb":              { "type": "int",  "match": ["11381", "Mémoire interne", "Internal memory"] },
+    "ram_type":            { "type": "text", "match": ["427", "Type de mémoire interne", "Internal memory type"] },
+    "ram_max_gb":          { "type": "int",  "match": ["1452", "Mémoire interne maximale", "Maximum internal memory"] },
+    "ram_slots_total":     { "type": "int",  "match": ["672", "Emplacements mémoire", "Memory slots"] },
+    "storage_capacity":    { "type": "text", "match": ["3318", "Capacité totale de stockage", "Total storage capacity"] },
+    "storage_slots_total": { "type": "int",  "match": ["3392", "Nombre de disque dur supporté"] },
+    "storage_connector":   { "type": "text", "match": ["982", "Interface du disque dur"] },
+    "rack_units":          { "type": "int",  "match": ["734", "Type de châssis", "Chassis type"] },
+    "server_format":       { "type": "text", "match": ["734", "Type de châssis", "Chassis type"] },
+    "lan_ports":           { "type": "ports", "ports": [ { "type": "RJ45", "match": ["2312"] } ] },
+    "power_watts":         { "type": "int",  "match": ["1242", "Alimentation d'énergie", "Power supply"] },
+    "redundant_psu":       { "type": "bool", "match": ["3247", "Alimentation redondante (RPS)"] },
+    "os_included":         { "type": "present", "match": ["3233", "Système d'exploitation installé"] },
+    "height_mm":           { "type": "int",  "match": ["1464", "Hauteur", "Height"] },
+    "width_mm":            { "type": "int",  "match": ["1649", "Largeur", "Width"] },
+    "depth_mm":            { "type": "int",  "match": ["1650", "Profondeur", "Depth"] }
+  },
+  "switch": {
+    "lan_ports":               { "type": "ports", "ports": [
+                                 { "type": "RJ45", "match": ["13503", "3770"] },
+                                 { "type": "SFP+", "match": ["24682"] },
+                                 { "type": "SFP",  "match": ["Quantités d'emplacements de module SFP"] } ] },
+    "console_port":            { "type": "present", "match": ["7625", "Port de console"] },
+    "switching_capacity_gbps": { "type": "int",  "match": ["1801", "Capacité de commutation", "Switching capacity"] },
+    "layer":                   { "type": "int",  "match": ["3241", "Banc de commutateurs", "Switch layer"] },
+    "managed":                 { "type": "bool", "match": ["3769", "Type de commutateur", "Switch type"] },
+    "stacking":                { "type": "bool", "match": ["Empilable", "Stackable"] },
+    "vlan_support":            { "type": "bool", "match": ["7157", "Support VLAN", "VLAN support"] },
+    "poe_support":             { "type": "bool", "match": ["2988", "Power over Ethernet (PoE)"] },
+    "poe_budget_watts":        { "type": "int",  "match": ["13505", "Budget Total Power over Ethernet (PoE)"] },
+    "rack_units":              { "type": "int",  "match": ["Unité de rack", "Rack unit"] },
+    "power_watts":             { "type": "int",  "match": ["9137", "445", "Consommation (max)", "Consommation électrique typique"] },
+    "height_mm":               { "type": "int",  "match": ["1464", "Hauteur", "Height"] },
+    "width_mm":                { "type": "int",  "match": ["1649", "Largeur", "Width"] },
+    "depth_mm":                { "type": "int",  "match": ["1650", "Profondeur", "Depth"] }
+  },
+  "router": {
+    "lan_ports":           { "type": "ports", "ports": [ { "type": "RJ45", "match": ["2312"] } ] },
+    "modem_integrated":    { "type": "bool", "match": ["24920", "DSL WAN"] },
+    "wifi_standard":       { "type": "text", "match": ["Norme Wi-Fi", "Normes Wi-Fi", "Wi-Fi standards"] },
+    "vpn_support":         { "type": "present", "match": ["2104", "2303", "Support de VPN"] },
+    "max_throughput_mbps": { "type": "int",  "match": ["1165", "Débit de transfert des données maximum"] },
+    "managed":             { "type": "bool", "match": ["3635", "Gestion basée sur le web"] },
+    "vlan_support":        { "type": "bool", "match": ["7157", "Support VLAN"] },
+    "rack_units":          { "type": "int",  "match": ["Unité de rack", "Rack unit"] },
+    "power_watts":         { "type": "int",  "match": ["445", "9137", "Consommation électrique typique", "Consommation (max)"] },
+    "height_mm":           { "type": "int",  "match": ["1464", "Hauteur"] },
+    "width_mm":            { "type": "int",  "match": ["1649", "Largeur"] },
+    "depth_mm":            { "type": "int",  "match": ["1650", "Profondeur"] }
+  },
+  "access_point": {
+    "wifi_standard":       { "type": "text", "match": ["Norme Wi-Fi", "Normes Wi-Fi", "Wi-Fi standards", "1802"] },
+    "max_throughput_mbps": { "type": "int",  "match": ["1165", "Débit de transfert des données maximum"] },
+    "ethernet_ports":      { "type": "int",  "match": ["2312", "Nombre de port ethernet LAN (RJ-45)"] },
+    "poe_support":         { "type": "bool", "match": ["2988", "Power over Ethernet (PoE)"] },
+    "antennas":            { "type": "int",  "match": ["6737", "Quantité d'antenne"] },
+    "mu_mimo":             { "type": "text", "match": ["34291", "Type MIMO"] },
+    "outdoor":             { "type": "contains", "match": ["7935", "Positionnement"], "needle": "extérieur" },
+    "mounting":            { "type": "text", "match": ["7935", "Positionnement", "Mounting"] },
+    "power_watts":         { "type": "int",  "match": ["445", "Consommation électrique typique"] }
+  }
+}
